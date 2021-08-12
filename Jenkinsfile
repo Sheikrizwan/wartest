@@ -9,9 +9,9 @@ pipeline {
 				sh 'mvn clean install'
 			}
 		}
-		stage('deploy') {
+		stage('Docker Image build') {
 			steps {
-				deploy adapters: [tomcat8(credentialsId: 'Tomcat_credentials', path: '', url: 'http://3.144.47.200:8080/')], contextPath: null, war: '**/*.war'
+				sh 'docker build . -t sheikrizwan/warfile:v1'
 			}
 		}	
 	}
